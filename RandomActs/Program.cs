@@ -20,21 +20,19 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+Console.WriteLine("I am building");
 using (var scope = app.Services.CreateScope())
 {
 
     var services = scope.ServiceProvider;
     var initialiser = services.GetRequiredService<DbInitialiser>();
+    Console.WriteLine("I am initialising");
     initialiser.Run();
 }
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
